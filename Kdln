@@ -1,0 +1,36 @@
+import discord
+
+# Variabel intents menyimpan hak istimewa bot
+intents = discord.Intents.default()
+# Mengaktifkan hak istimewa message-reading
+intents.messages = True
+# Membuat bot di variabel klien dan mentransfernya hak istimewa
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'Kita telah masuk sebagai {client.user}')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith('$halo'):
+        await message.channel.send("Hi!")
+    elif message.content.startswith('$bye'):
+        await message.channel.send("\U0001f642")  # Emoji waving hand
+    else:
+        await message.channel.send(message.content)
+
+client.run("MTE3OTA0MTI4OTk4ODIxNDgwNA.G22E-1.BGmMokJu1ndjF0sl3-YFCjD86e11wZwwt0y1jU")  # Ganti dengan token bot Discord Anda
+
+import random
+
+def gen_pass(pass_length):
+    elements = "+-/*!&$#?=@<>"
+    password = ""
+
+    for i in range(pass_length):
+        password += random.choice(elements)
+
+    return password
